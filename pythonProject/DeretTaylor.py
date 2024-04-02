@@ -62,31 +62,31 @@ class TaylorSeries():
         return self.coefficients
 
 
-# def my_function(x):
-#     return x ** 2 - 10 * x ** 4 + 6
-#
-#
-# order = 3
-# center = 3
-# taylor_series = TaylorSeries(my_function, order, center)
-#
-# x_value = 3
-# exact_value = my_function(x_value)
-# approx_value = taylor_series.approximate_value(x_value)
-# print("Exact value at x =", x_value, ":", exact_value)
-# print("Approximate value at x =", x_value, ":", approx_value)
-#
-# x_values = np.linspace(0, 5, 400)
-# function_values = my_function(x_values)
-# approximation_values = [taylor_series.approximate_value(x) for x in x_values]
-#
-# plt.figure(figsize=(10, 6))
-# plt.plot(x_values, function_values, label='Original Function')
-# plt.plot(x_values, approximation_values, label='Taylor Series Approximation (Order {})'.format(order))
-# plt.scatter(x_value, exact_value, color='red', label='Exact value at x=3')
-# plt.title('Function vs. Taylor Series Approximation')
-# plt.xlabel('x')
-# plt.ylabel('f(x)')
-# plt.legend()
-# plt.grid(True)
+def my_function(x):
+    return x ** 2 - 10 * x ** 4 + 6
+
+
+order = 3
+center = 3
+taylor_series = TaylorSeries(my_function, order, center)
+
+x_value = 3
+exact_value = my_function(x_value)
+approx_value = taylor_series.approximate_value(x_value)
+print("Exact value at x =", x_value, ":", exact_value)
+print("Approximate value at x =", x_value, ":", approx_value)
+
+x_values = np.linspace(0, 5, 400)
+function_values = my_function(x_values)
+approximation_values = [taylor_series.approximate_value(x) for x in x_values]
+
+plt.figure(figsize=(10, 6))
+plt.plot(x_values, function_values, label='Original Function')
+plt.plot(x_values, approximation_values, label='Taylor Series Approximation (Order {})'.format(order))
+plt.scatter(x_value, exact_value, color='red', label='Exact value at x=3')
+plt.title('Function vs. Taylor Series Approximation')
+plt.xlabel('x')
+plt.ylabel('f(x)')
+plt.legend()
+plt.grid(True)
 plt.show()

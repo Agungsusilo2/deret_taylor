@@ -2,7 +2,7 @@ from matplotlib import pyplot as plt
 import numpy as np
 
 
-# method euler
+# Euler's method
 def euler(f, x0, y0, h, n):
     x_values = [x0]
     y_values = [y0]
@@ -13,41 +13,10 @@ def euler(f, x0, y0, h, n):
         x_values.append(x0)
         y_values.append(y0)
 
-    x = x_values
-    y = y_values
-
-    return x, y
+    return x_values, y_values
 
 
-# this first question
-# def f(x, y):
-#     return x + y
-#
-#
-# result = euler(f, 0, 1, 0.1, 10)
-# print(result)
-
-def f1(x, y):
-    return y / (2 * x + 1)
-
-
-def f2(x):
-    return np.sqrt(2 * x + 1)
-
-
-x, y = euler(f1, x0=0, y0=1, h=0.05, n=100)
-x_values = np.arange(0, 5.1, 0.05)
-true_y_values = f2(x_values)
-plt.xlabel("x")
-plt.ylabel("y")
-plt.plot(x_values, true_y_values, color='red', label='Solusi Analitik', linestyle=':')
-plt.plot(x, y, label='Metode Euler', color='blue', linestyle='--')
-plt.legend()
-plt.grid()
-plt.show()
-
-
-# heun
+# Heun's method
 def heun(f, x0, y0, h, n, iter=1):
     x_values = [x0]
     y_values = [y0]
@@ -65,15 +34,10 @@ def heun(f, x0, y0, h, n, iter=1):
         x_values.append(x0)
         y_values.append(y0)
 
-    return x, y
+    return x_values, y_values
 
 
-x, y = heun(f1, x0=0, y0=1, h=0.05, n=100)
-plt.plot(x, y, color='red', linestyle="--")
-plt.show()
-
-
-# range kutta
+# Fourth-order Runge-Kutta method
 def rk4(f, x0, y0, h, n):
     x_values = [x0]
     y_values = [y0]
@@ -91,6 +55,45 @@ def rk4(f, x0, y0, h, n):
     return x_values, y_values
 
 
-x, y = rk4(f1, x0=0, y0=1, h=0.05, n=100)
-plt.plot(x, y, color='red', linestyle="--")
-plt.show()
+# Analytical solution
+def f2(x):
+    return np.sqrt(2 * x + 1)
+
+
+def f1(x, y):
+    return y / (2 * x + 1)
+
+
+def plot_method(x_values, y_values, label, color):
+    plt.plot(x_values, y_values, label=label, color=color, linestyle='--')
+
+
+def main():
+    x0, y0 = 0, 1
+    h = 0.05
+    n = 100
+
+    x_values = np.arange(0, 5.1, 0.05)
+    true_y_values = f2(x_values)
+    plt.xlabel("x")
+    plt.ylabel("y")
+    plt.plot(x_values, true_y_values, color='red', label='Analytical Solution', linestyle=':')
+
+    x, y = euler(f1, x0, y0, h, n)
+    plot_method(x, y, 'Euler Method', 'blue')
+
+
+    x, y = heun(f1, x0, y0, h, n)
+    plot_method(x, y, 'Heun Method', 'green')
+
+    x, y = rk4(f1, x0, y0, h, n)
+    plot_method(x, y, 'RK4 Method', 'orange')
+
+    plt.legend()
+    plt.grid()
+    plt.show()
+
+
+
+if __name__ == "__main__":
+    main()
